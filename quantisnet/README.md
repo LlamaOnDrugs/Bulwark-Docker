@@ -2,7 +2,7 @@
 
 ## Description
 
-Bulwark offers [Docker](https://www.docker.com/) images of the bulwark node. Click [here](https://medium.com/@Jernfrost/a-short-explanation-of-what-docker-and-containers-are-b65974130683) to learn more about Docker.
+Bulwark offers [Docker](https://www.docker.com/) images of the quantisnet node. Click [here](https://medium.com/@Jernfrost/a-short-explanation-of-what-docker-and-containers-are-b65974130683) to learn more about Docker.
 
 ### Terminology
 
@@ -83,7 +83,7 @@ The easiest way to run one or more masternodes via Docker is with the use of a [
 To create said file, run the following command:
 
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/bulwark-crypto/Bulwark-Docker/master/bulwark-node/scripts/compose-gen.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/LlamaOnDrugs/Bulwark-Docker/master/quantisnet/scripts/compose-gen.sh)
 ```
 
 After you've created your file, install docker-compose by running the following commands:
@@ -99,29 +99,29 @@ Then, all you need to do is run
 docker-compose up -d
 ```
 
-inside the directory containing your docker-compose.yml file (called `bulwark-mn` by default) to start all masternodes listed.
+inside the directory containing your docker-compose.yml file (called `quantisnet-mn` by default) to start all masternodes listed.
 
-### Using bulwark.conf (For a single node)
+### Using quantisnet.conf (For a single node)
 
 The Bulwark image comes with the nano text editor pre-installed, so if you want, you can start the node with a command like
 
 ```bash
-docker container run -d -v NAME:/home/bulwark/.bulwark --name NAME bulwarkcrypto/bulwark:latest
+docker container run -d -v NAME:/home/quantisnet/.quantisnetcore --name NAME QuantisDev/QuantisNet-Core:latest
 ```
 
-and then edit your bulwark.conf by running
+and then edit your quantisnet.conf by running
 
 ```bash
-docker container exec -it NAME nano /home/bulwark/.bulwark/bulwark.conf
+docker container exec -it NAME nano /home/quantisnet/.quantisnetcore/quantisnet.conf
 ```
 
 Then, restart your container with `docker container restart NAME`  
-bulwarkd will restart and use the settings from bulwark.conf, which will persist unless you delete the volume.
+quantisnetd will restart and use the settings from quantisnet.conf, which will persist unless you delete the volume.
 
 ### Via command line (not recommended)
 
 ```bash
-docker container run -d -v NAME:/home/bulwark/.bulwark --name NAME bulwarkcrypto/bulwark:latest  -externalip=ADDRESS -masternode=1 -masternodeaddr=ADDRESS:52543 -masternodeprivkey=KEY -listen=1 -server=1
+docker container run -d -v NAME:/home/quantisnet/.quantisnetcore --name NAME QuantisDev/QuantisNet-Core:latest  -externalip=ADDRESS -masternode=1 -masternodeaddr=ADDRESS:9801 -masternodeprivkey=KEY -listen=1 -server=1
 ```
 
 Replace _NAME_, _ADDRESS_ and _KEY_ with your own values.
@@ -140,11 +140,11 @@ To update a non-compose node to the newest version of Bulwark, run these command
 
 ```bash
 docker container stop NAME
-docker image pull bulwarkcrypto/bulwark:latest
-docker container run bulwarkcrypto/bulwark:latest
+docker image pull QuantisDev/QuantisNet-Core:latest
+docker container run QuantisDev/QuantisNet-Core:latest
 ```
 
-Please note that unless you manually added your configuration to bulwark.conf, you will need to start your node with the parameters you used before. Also, make sure to assign the same volume to the container with the `-v` parameter to keep your chaindata.
+Please note that unless you manually added your configuration to quantisnet.conf, you will need to start your node with the parameters you used before. Also, make sure to assign the same volume to the container with the `-v` parameter to keep your chaindata.
 
 ### docker-compose
 
@@ -160,11 +160,11 @@ docker-compose up
 
 ### Image
 
-The Docker image you want to use is _bulwarkcrypto/bulwark:latest_.
+The Docker image you want to use is _QuantisDev/QuantisNet-Core:latest_.
 
 ### Entrypoint
 
-The entrypoint script passes anything you add to the `docker run` statement as a [parameter](https://kb.bulwarkcrypto.com/Information/Running-Bulwark/#command-line-arguments) to bulwarkd.
+The entrypoint script passes anything you add to the `docker run` statement as a [parameter](https://kb.quantisnetcorecrypto.com/Information/Running-Bulwark/#command-line-arguments) to quantisnetd.
 
 ## docker-compose.yml example
 
@@ -176,23 +176,23 @@ services:
     command:
       [
         "-masternode=1",
-        "-masternodeaddr=[ADDRESS]:52543",
+        "-masternodeaddr=[ADDRESS]:9801",
         "-masternodeprivkey=87654321abcdef",
         "-listen=1",
         "-server=1",
       ]
     healthcheck:
-      test: ["CMD", "bulwark-cli", "getinfo"]
+      test: ["CMD", "quantisnet-cli", "getinfo"]
       interval: 10m
       timeout: 30s
       retries: 3
-    image: bulwarkcrypto/bulwark:latest
+    image: QuantisDev/QuantisNet-Core:latest
     networks:
       - NAME
     ports:
-      - "ADDRESS:52543:52543"
+      - "ADDRESS:9801:9801"
     volumes:
-      - NAME:/home/bulwark/.bulwark
+      - NAME:/home/quantisnet/.quantisnetcore
 
 networks:
   NAME:
@@ -211,7 +211,7 @@ A shell script that allows you to create a docker-compose file for any number of
 To run the script, paste the following line into a terminal and press Enter:
 
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/bulwark-crypto/Bulwark-Docker/master/bulwark-node/scripts/compose-gen.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/quantisnet-crypto/Bulwark-Docker/master/quantisnet-node/scripts/compose-gen.sh)
 ```
 
 The script will ask you for three pieces of information:
@@ -222,7 +222,7 @@ The script will ask you for three pieces of information:
 
 After you enter those, it will ask if you want to add another node. The process will repeat for every additional node.
 
-Once done, you will be left with a file called `docker-compose.yml` inside a folder called `bulwark-mn`.  
+Once done, you will be left with a file called `docker-compose.yml` inside a folder called `quantisnet-mn`.  
 This file contains all the information needed for docker to start your node(s).
 
 ### Prerequisites
@@ -236,7 +236,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ### Running docker-compose
 
-From inside the bulwark-mn directory, run the following command to start:
+From inside the quantisnet-mn directory, run the following command to start:
 
 ```bash
 docker-compose up -d
@@ -252,7 +252,7 @@ docker-compose down
 
 ### Updating docker-compose containers
 
-To update your containers to a newer release of Bulwark, run these commands inside the bulwark-mn directory:
+To update your containers to a newer release of Bulwark, run these commands inside the quantisnet-mn directory:
 
 ```bash
 docker-compose down
@@ -260,23 +260,23 @@ docker-compose pull
 docker-compose up -d
 ```
 
-### Running bulwark-cli inside a container
+### Running quantisnet-cli inside a container
 
-To run bulwark-cli inside a container to check your sync status or do other things, you need to address the container by name. You can find out by running
+To run quantisnet-cli inside a container to check your sync status or do other things, you need to address the container by name. You can find out by running
 
 ```bash
 docker container ls
 ```
 
-To run bulwark-cli inside a specific container, run
+To run quantisnet-cli inside a specific container, run
 
 ```bash
-docker container exec NAME_OF_CONTAINER bulwark-cli
+docker container exec NAME_OF_CONTAINER quantisnet-cli
 ```
 
 ### Troubleshooting
 
-If bulwarkd cannot start because of corrupted chaindata, you can delete the associated storage volume(s) and restart by running
+If quantisnetd cannot start because of corrupted chaindata, you can delete the associated storage volume(s) and restart by running
 
 ```bash
 docker-compose down -v
@@ -290,5 +290,5 @@ This will resync your node(s) and fix any corruption issues.
 To install docker and docker-compose and create a compose file on your X86 VPS running Ubuntu 16.04 or higher, run this command:
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/bulwark-crypto/Bulwark-Docker/master/bulwark-node/scripts/ubuntu-docker-mn.sh | bash
+wget -qO- https://raw.githubusercontent.com/quantisnet-crypto/Bulwark-Docker/master/quantisnet-node/scripts/ubuntu-docker-mn.sh | bash
 ```
