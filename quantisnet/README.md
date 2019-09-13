@@ -106,7 +106,7 @@ inside the directory containing your docker-compose.yml file (called `quantisnet
 The Bulwark image comes with the nano text editor pre-installed, so if you want, you can start the node with a command like
 
 ```bash
-docker container run -d -v NAME:/home/quantisnet/.quantisnetcore --name NAME QuantisDev/QuantisNet-Core:latest
+docker container run -d -v NAME:/home/quantisnet/.quantisnetcore --name NAME bulwarkcrypto/bulwark:latest
 ```
 
 and then edit your quantisnet.conf by running
@@ -121,7 +121,7 @@ quantisnetd will restart and use the settings from quantisnet.conf, which will p
 ### Via command line (not recommended)
 
 ```bash
-docker container run -d -v NAME:/home/quantisnet/.quantisnetcore --name NAME QuantisDev/QuantisNet-Core:latest  -externalip=ADDRESS -masternode=1 -masternodeaddr=ADDRESS:9801 -masternodeprivkey=KEY -listen=1 -server=1
+docker container run -d -v NAME:/home/quantisnet/.quantisnetcore --name NAME bulwarkcrypto/bulwark:latest  -externalip=ADDRESS -masternode=1 -masternodeaddr=ADDRESS:9801 -masternodeprivkey=KEY -listen=1 -server=1
 ```
 
 Replace _NAME_, _ADDRESS_ and _KEY_ with your own values.
@@ -140,8 +140,8 @@ To update a non-compose node to the newest version of Bulwark, run these command
 
 ```bash
 docker container stop NAME
-docker image pull QuantisDev/QuantisNet-Core:latest
-docker container run QuantisDev/QuantisNet-Core:latest
+docker image pull bulwarkcrypto/bulwark:latest
+docker container run bulwarkcrypto/bulwark:latest
 ```
 
 Please note that unless you manually added your configuration to quantisnet.conf, you will need to start your node with the parameters you used before. Also, make sure to assign the same volume to the container with the `-v` parameter to keep your chaindata.
@@ -160,7 +160,7 @@ docker-compose up
 
 ### Image
 
-The Docker image you want to use is _QuantisDev/QuantisNet-Core:latest_.
+The Docker image you want to use is _bulwarkcrypto/bulwark:latest_.
 
 ### Entrypoint
 
@@ -186,7 +186,7 @@ services:
       interval: 10m
       timeout: 30s
       retries: 3
-    image: QuantisDev/QuantisNet-Core:latest
+    image: bulwarkcrypto/bulwark:latest
     networks:
       - NAME
     ports:
