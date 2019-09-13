@@ -14,8 +14,8 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && tar xzf quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
-  && mv /bin/quantisnetd /usr/local/bin \
-  && mv /bin/quantisnet-cli /usr/local/bin \
+  && mv quantisnetcore-2.1.3//bin/quantisnetd /usr/local/bin \
+  && mv quantisnetcore-2.1.3//bin/quantisnet-cli /usr/local/bin \
   && rm -r bin include lib share \
   && rm quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
   && adduser quantisnet --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
