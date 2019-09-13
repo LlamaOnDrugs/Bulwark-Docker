@@ -94,7 +94,6 @@ cat >> docker-compose.yml << EOL
       interval: 10m
       timeout: 30s
       retries: 3
-    image: bulwarkcrypto/bulwark:latest
     networks:
       - ${NAMES[$i]}
     ports:
