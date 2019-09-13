@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 LABEL maintainer="Llama <llamaquan@gmail.com>"
 LABEL version="2.3.2.2"
 LABEL name="QuantisNet"
