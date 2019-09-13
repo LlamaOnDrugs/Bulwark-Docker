@@ -38,18 +38,18 @@ sudo chmod +x /usr/local/bin/docker-compose
 echo "Testing installation..."
 docker -v || exit 1
 docker-compose -v || exit 1
-echo "Creating bulwark-mn directory..."
+echo "Creating quantisnet-mn directory..."
 cat << EOL
 
 Docker setup completed. We will now ask for your masternode details to create
 a docker-compose file you can use to start your masternodes. This file will be
-created inside a folder called "bulwark-mn" in the directory where you ran the 
+created inside a folder called "quantisnet-mn" in the directory where you ran the 
 setup script - $(pwd) 
 
 EOL
 read -rp "Press any key to continue."
 clear
-mkdir ./bulwark-mn && cd ./bulwark-mn || exit 1
+mkdir ./quantisnet-mn && cd ./quantisnet-mn || exit 1
 
 read -rp "Please enter the name of your node: " NAME
 NAMES+=("$NAME")
@@ -83,24 +83,24 @@ cat >> docker-compose.yml << EOL
     command:
       [
         "-masternode=1",
-        "-masternodeaddr=[${IPS[$i]}]:52543",
+        "-masternodeaddr=[${IPS[$i]}]:9801",
         "-masternodeprivkey=${KEYS[$i]}",
         "-listen=1",
         "-server=1",
       ]
     container_name: ${NAMES[$i]}
     healthcheck:
-      test: ["CMD", "bulwark-cli", "getinfo"]
+      test: ["CMD", "quantisnet-cli", "getinfo"]
       interval: 10m
       timeout: 30s
       retries: 3
-    image: bulwarkcrypto/bulwark:latest
+    image: QuantisDev/QuantisNet-Core:latest
     networks:
       - ${NAMES[$i]}
     ports:
-      - "${IPS[$i]}:52543:52543"
+      - "${IPS[$i]}:9801:9801"
     volumes:
-      - ${NAMES[$i]}:/home/bulwark/.bulwark
+      - ${NAMES[$i]}:/home/quantisnet/.quantisnetcore
 
 EOL
 done
@@ -134,7 +134,7 @@ cat << EOL
 
 Setup complete. You can now start your node(s) with: 
 
-cd bulwark-mn
+cd quantisnet-mn
 docker-compose up -d
 
 Alias commands for all your masternodes have been installed. To run a command

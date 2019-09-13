@@ -23,7 +23,7 @@ done
 
 echo "Writing docker-compose.yml file..."
 
-mkdir ./bulwark-mn && cd ./bulwark-mn || exit 1
+mkdir ./quantisnet-mn && cd ./quantisnet-mn || exit 1
 
 echo 'version: "3.7"' > docker-compose.yml
 echo 'services:' >> docker-compose.yml
@@ -34,24 +34,24 @@ cat >> docker-compose.yml << EOL
     command:
       [
         "-masternode=1",
-        "-masternodeaddr=[${IPS[$i]}]:52543",
+        "-masternodeaddr=[${IPS[$i]}]:9801",
         "-masternodeprivkey=${KEYS[$i]}",
         "-listen=1",
         "-server=1",
       ]
     container_name: ${NAMES[$i]}
     healthcheck:
-      test: ["CMD", "bulwark-cli", "getinfo"]
+      test: ["CMD", "quantisnet-cli", "getinfo"]
       interval: 10m
       timeout: 30s
       retries: 3
-    image: bulwarkcrypto/bulwark:latest
+    image: QuantisDev/QuantisNet-Core:latest
     networks:
       - ${NAMES[$i]}
     ports:
-      - "${IPS[$i]}:52543:52543"
+      - "${IPS[$i]}:9801:9801"
     volumes:
-      - ${NAMES[$i]}:/home/bulwark/.bulwark
+      - ${NAMES[$i]}:/home/quantisnet/.quantisnetcore
 
 EOL
 done
@@ -73,7 +73,7 @@ cat << EOL
 
 Setup complete. You can now start your node(s) with: 
 
-cd bulwark-mn
+cd quantisnet-mn
 docker-compose up -d
 
 EOL
