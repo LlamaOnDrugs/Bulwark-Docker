@@ -25,6 +25,6 @@ RUN apt-get update \
   && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh
 
 USER quantisnet
-VOLUME [ "/home/quantisnet/.quantisnet" ]
+VOLUME [ "/home/quantisnet/.quantisnetcore" ]
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 EXPOSE 9801
