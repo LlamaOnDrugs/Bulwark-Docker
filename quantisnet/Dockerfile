@@ -13,8 +13,10 @@ RUN apt-get update \
   && apt-get install --no-install-recommends -y nano=2.5.3-2ubuntu2 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
-  && tar xzf quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz /bin/quantisnet-cli -C /usr/local/bin/ \
-  && tar xzf quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz /bin/quantisnetd -C /usr/local/bin/ \
+  && tar xzf quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
+  && mv /bin/quantisnetd /usr/local/bin \
+  && mv /bin/quantisnet-cli /usr/local/bin \
+  && rm -r bin include lib share \
   && rm quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
   && adduser quantisnet --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
   && mkdir /home/quantisnet/.quantisnet && chown -R quantisnet:quantisnet /home/quantisnet/.quantisnet \
