@@ -1,9 +1,9 @@
 FROM ubuntu:18.04
 LABEL maintainer="Llama <llamaquan@gmail.com>"
-LABEL version="2.2.0.0"
+LABEL version="2.3.2.2"
 LABEL name="QuantisNet"
 
-ENV BULWARK_VERSION 2.2.0.0
+ENV QUANTISNET_VERSION 2.3.2.2
 SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
 ADD https://github.com/QuantisDev/QuantisNet-Core/releases/download/v2.1.3.2/quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz /
@@ -23,4 +23,4 @@ RUN apt-get update \
 USER quantisnet
 VOLUME [ "/home/quantisnet/.quantisnet" ]
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
-EXPOSE 52543
+EXPOSE 9801
