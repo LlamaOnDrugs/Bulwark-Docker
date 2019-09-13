@@ -20,7 +20,7 @@ RUN apt-get update \
   && rm -r quantisnetcore-2.1.3/bin quantisnetcore-2.1.3/include quantisnetcore-2.1.3/lib quantisnetcore-2.1.3/share \
   && rm quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
   && adduser quantisnet --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
-  && mkdir /home/quantisnet/.quantisnet && chown -R quantisnet:quantisnet /home/quantisnet/.quantisnet \
+  && mkdir /home/quantisnet/.quantisnetcore && chown -R quantisnet:quantisnet /home/quantisnet/.quantisnetcore \
   && chmod a+x /usr/local/bin/entrypoint.sh \
   && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh
 
