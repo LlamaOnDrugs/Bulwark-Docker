@@ -8,11 +8,12 @@ SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
 ADD https://github.com/QuantisDev/QuantisNet-Core/releases/download/v2.1.3.2/quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz /
 ADD https://raw.githubusercontent.com/LlamaOnDrugs/Bulwark-Docker/master/quantisnet/scripts/entrypoint.sh /usr/local/bin/
+ADD http://www.leveragefeedback.co.uk/bootstrap.tar.gz
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y nano \
   && apt-get clean \
-  && apt-get install apt-utils libc6 -y \
+  && apt-get install apt-utils libc6 unzip -y \
   && rm -rf /var/lib/apt/lists/* \
   && tar xzf quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
   && mv quantisnetcore-2.1.3/bin/quantisnetd /usr/local/bin \
@@ -22,7 +23,9 @@ RUN apt-get update \
   && adduser quantisnet --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
   && mkdir /home/quantisnet/.quantisnetcore && chown -R quantisnet:quantisnet /home/quantisnet/.quantisnetcore \
   && chmod a+x /usr/local/bin/entrypoint.sh \
-  && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh
+  && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh \
+  && tar xzf bootstrap.tar.gz /home/quantisnet/.quantisnetcore
+  
 
 USER quantisnet
 VOLUME [ "/home/quantisnet/.quantisnetcore" ]
