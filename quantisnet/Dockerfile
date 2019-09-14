@@ -8,7 +8,7 @@ SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
 ADD https://github.com/QuantisDev/QuantisNet-Core/releases/download/v2.1.3.2/quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz /
 ADD https://raw.githubusercontent.com/LlamaOnDrugs/Bulwark-Docker/master/quantisnet/scripts/entrypoint.sh /usr/local/bin/
-ADD http://www.leveragefeedback.co.uk/bootstrap.tar.gz
+ADD http://www.leveragefeedback.co.uk/bootstrap.tar.gz /
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y nano \
