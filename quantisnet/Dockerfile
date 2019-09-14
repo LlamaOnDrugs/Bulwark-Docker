@@ -10,7 +10,7 @@ ADD https://github.com/QuantisDev/QuantisNet-Core/releases/download/v2.1.3.2/qua
 ADD https://raw.githubusercontent.com/LlamaOnDrugs/Bulwark-Docker/master/quantisnet/scripts/entrypoint.sh /usr/local/bin/
 
 RUN apt-get update \
-  && apt-get install --no-install-recommends -y nano=2.5.3-2ubuntu2 \
+  && apt-get install --no-install-recommends -y nano \
   && apt-get clean \
   && apt-get install apt-utils -y \
   && rm -rf /var/lib/apt/lists/* \
