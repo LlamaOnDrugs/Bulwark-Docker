@@ -125,7 +125,7 @@ cat >> ~/.bashrc << EOL
 EOL
 
 for i in "${!NAMES[@]}"; do
-echo "alias ${NAMES[$i]}='docker container exec -it ${NAMES[$i]}'" >> ~/.bashrc 
+echo "alias ${NAMES[$i]}='docker exec ${NAMES[$i]}'" >> ~/.bashrc 
 done 
 
 source ~/.bashrc
