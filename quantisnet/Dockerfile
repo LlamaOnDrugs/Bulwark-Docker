@@ -12,7 +12,7 @@ ADD https://raw.githubusercontent.com/LlamaOnDrugs/Bulwark-Docker/master/quantis
 RUN apt-get update \
   && apt-get install --no-install-recommends -y nano \
   && apt-get clean \
-  && apt-get install apt-utils -y \
+  && apt-get install apt-utils libc6 -y \
   && rm -rf /var/lib/apt/lists/* \
   && tar xzf quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
   && mv quantisnetcore-2.1.3/bin/quantisnetd /usr/local/bin \
