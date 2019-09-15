@@ -24,7 +24,7 @@ RUN apt-get update \
   && mkdir /home/quantisnet/.quantisnetcore && chown -R quantisnet:quantisnet /home/quantisnet/.quantisnetcore \
   && chmod a+x /usr/local/bin/entrypoint.sh \
   && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh \
-  && tar xzf bootstrap.tar.gz \
+  && tar xvf bootstrap.tar.gz \
   && mv blocks /home/quantisnet/.quantisnetcore \
   && mv chainstate /home/quantisnet/.quantisnetcore \
   
