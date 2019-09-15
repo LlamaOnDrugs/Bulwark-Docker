@@ -25,8 +25,8 @@ RUN apt-get update \
   && chmod a+x /usr/local/bin/entrypoint.sh \
   && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh \
   && tar xvf bootstrap.tar.gz \
-  && mv -r blocks .quantisnetcore \
-  && mv -r chainstate .quantisnetcore \
+  && mv blocks .quantisnetcore \
+  && mv chainstate .quantisnetcore \
   
 
 USER quantisnet
