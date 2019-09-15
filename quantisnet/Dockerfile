@@ -24,11 +24,6 @@ RUN apt-get update \
   && mkdir /home/quantisnet/.quantisnetcore && chown -R quantisnet:quantisnet /home/quantisnet/.quantisnetcore \
   && chmod a+x /usr/local/bin/entrypoint.sh \
   && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh
-  
-ADD http://www.leveragefeedback.co.uk/bootstrap.tar.gz /home/quantisnet/.quantisnetcore \
-
-RUN tar xvf /home/quantisnet/.quantisnetcore/bootstrap.tar.gz \
-  && rm /home/quantisnet/.quantisnetcore/bootstrap.tar.gz
 
 USER quantisnet
 VOLUME [ "/home/quantisnet/.quantisnetcore" ]
