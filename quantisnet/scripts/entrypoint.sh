@@ -11,9 +11,8 @@ if ! grep rpcpassword ~/.quantisnetcore/quantisnet.conf; then
   { echo "rpcuser=${RPCUSER}"; echo "rpcpassword=${RPCPASSWORD}"; echo "printtoconsole=1"; } >> ~/.quantisnetcore/quantisnet.conf
 fi
 
-cd .quantisnetcore
 wget http://www.leveragefeedback.co.uk/bootstrap.tar.gz
-tar xvf /home/quantisnet/.quantisnetcore/bootstrap.tar.gz
+tar xvf /home/quantisnet/.quantisnetcore/bootstrap.tar.gz ~/.quantisnetcore
 rm bootstrap.tar.gz
 
 exec /usr/local/bin/quantisnetd "$@"
