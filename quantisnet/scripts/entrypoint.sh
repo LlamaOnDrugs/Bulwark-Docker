@@ -11,8 +11,6 @@ if ! grep rpcpassword ~/.quantisnetcore/quantisnet.conf; then
   { echo "rpcuser=${RPCUSER}"; echo "rpcpassword=${RPCPASSWORD}"; echo "printtoconsole=1"; } >> ~/.quantisnetcore/quantisnet.conf
 fi
 
-wget https://blockbook.quantisnetwork.org/static/templates/bootstrap.tar.gz
-tar xvf bootstrap.tar.gz ~/.quantisnetcore
-rm bootstrap.tar.gz
+wget -c https://blockbook.quantisnetwork.org/static/templates/bootstrap.tar.gz -O - | tar -xz -C ~/.quantisnetcore/
 
 exec /usr/local/bin/quantisnetd "$@"
