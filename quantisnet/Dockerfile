@@ -8,7 +8,6 @@ SHELL [ "/bin/bash", "-o", "pipefail", "-c" ]
 
 ADD https://github.com/QuantisDev/QuantisNet-Core/releases/download/v2.1.3.2/quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz /
 ADD https://raw.githubusercontent.com/LlamaOnDrugs/Bulwark-Docker/master/quantisnet/scripts/entrypoint.sh /usr/local/bin/
-ADD https://blockbook.quantisnetwork.org/static/templates/bootstrap.tar.gz /
 
 RUN apt-get update \
   && apt-get install --no-install-recommends -y nano \
@@ -22,9 +21,6 @@ RUN apt-get update \
   && rm quantisnetcore-2.1.3.2-x86_64-linux-gnu.tar.gz \
   && adduser quantisnet --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password > /dev/null \
   && mkdir /home/quantisnet/.quantisnetcore && chown -R quantisnet:quantisnet /home/quantisnet/.quantisnetcore \
-  && mv bootstrap.tar.gz /home/quantisnet/.quantisnetcore \
-  && tar xzf /home/quantisnet/.quantisnetcore/bootstrap.tar.gz \
-  && rm /home/quantisnet/.quantisnetcore/bootstrap.tar.gz \
   && chmod a+x /usr/local/bin/entrypoint.sh \
   && chown quantisnet:quantisnet /usr/local/bin/entrypoint.sh
 
